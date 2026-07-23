@@ -16,3 +16,7 @@ spring:
 
 flyway:
   enabled: true
+
+jwt:
+  secret: 8xVnM2QpL7sR9wYcH4dEfK6tUzJ3aBxN5mQ8vLpR2sX7zYcF9w
+  access-token-expiration: 900000

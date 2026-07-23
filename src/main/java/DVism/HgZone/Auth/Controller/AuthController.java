@@ -30,4 +30,10 @@ public class AuthController {
         RegisterResponse response = authService.registerUser(registerRequest);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<DVism.HgZone.Auth.DTO.Response.LoginResponse> login(@Valid @RequestBody DVism.HgZone.Auth.DTO.Request.LoginRequest loginRequest) {
+        DVism.HgZone.Auth.DTO.Response.LoginResponse response = authService.loginUser(loginRequest);
+        return ResponseEntity.ok(response);
+    }
 }
