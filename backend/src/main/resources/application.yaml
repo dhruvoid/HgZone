@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: HgZone
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://hgzone.cxyyc6comus3.eu-north-1.rds.amazonaws.com:5432/postgres
+    username: postgres
+    password: Bakchod69
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+flyway:
+  enabled: true
+
+jwt:
+  secret: 8xVnM2QpL7sR9wYcH4dEfK6tUzJ3aBxN5mQ8vLpR2sX7zYcF9w
+  access-token-expiration: 900000
