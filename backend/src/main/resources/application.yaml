@@ -3,9 +3,9 @@ spring:
     name: HgZone
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://hgzone.cxyyc6comus3.eu-north-1.rds.amazonaws.com:5432/postgres
-    username: postgres
-    password: Bakchod69
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/hg_zone?options=-c%20TimeZone=UTC}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
   jpa:
     hibernate:
       ddl-auto: validate

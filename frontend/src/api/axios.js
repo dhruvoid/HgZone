@@ -4,7 +4,7 @@ import { setCredentials, logOut } from '../store/authSlice';
 
 // 1. Create a base Axios instance. This saves us from typing the base URL every time.
 const api = axios.create({
-    baseURL: 'http://localhost:8080', // Removed /api prefix to match backend
+    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080', // Uses env var in production, localhost locally
     withCredentials: true // CRITICAL: This tells Axios to automatically send the HttpOnly cookies!
 });
 

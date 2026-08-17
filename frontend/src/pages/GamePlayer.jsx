@@ -31,20 +31,22 @@ const GamePlayer = () => {
         };
 
         const handleMessage = (event) => {
-            console.log("Message from game:", event.data);
-            const msg = event.data;
+            console.log("GamePlayer received message:", event.data);
+            const dataStr = typeof event.data === 'string' ? event.data.toLowerCase() : JSON.stringify(event.data || '').toLowerCase();
             if (
-                msg === 'quit' || 
-                msg === 'quit_game' || 
-                msg === 'exit' || 
-                msg?.action === 'quit' || 
-                msg?.type === 'QUIT' ||
-                msg?.status === 'quit'
+                dataStr.includes('quit') || 
+                dataStr.includes('exit') || 
+                dataStr.includes('close')
             ) {
                 if (document.fullscreenElement) {
                     document.exitFullscreen().catch(() => {});
                 }
                 navigate('/dashboard');
+                setTimeout(() => {
+                    if (window.location.pathname !== '/dashboard') {
+                        window.location.href = '/dashboard';
+                    }
+                }, 100);
             }
         };
 
@@ -166,7 +168,6 @@ const GamePlayer = () => {
                     ref={iframeRef}
                     src={gameUrl}
                     title={`${gameId} game`}
-                    credentialless="true"
                     style={{
                         width: '100%',
                         height: '100%',

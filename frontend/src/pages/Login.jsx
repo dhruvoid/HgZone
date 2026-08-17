@@ -27,8 +27,8 @@ const Login = () => {
             
             const accessToken = response.data.accessToken;
 
-            // Save the shiny new token into Redux Memory!
-            dispatch(setCredentials({ accessToken }));
+            // Save token and username into Redux Memory
+            dispatch(setCredentials({ user: username, accessToken }));
             
             // Clear form
             setUsername('');

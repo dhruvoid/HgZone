@@ -254,12 +254,21 @@ const engine = new Engine(GODOT_CONFIG);
 			if (canvas) canvas.focus();
 		}, displayFailureNotice);
 
-		// Override window.close & add global quit Game handler for Godot JS bridge
+		// Override window.close & add global quit Game helpers for Godot JS bridge
 		window.close = function () {
-			window.parent.postMessage('quit_game', '*');
+			console.log("[Godot Web] window.close() invoked!");
+			try { window.parent.postMessage('quit_game', '*'); } catch (e) {}
+			try { window.top.postMessage('quit_game', '*'); } catch (e) {}
 		};
 		window.quitGame = function () {
-			window.parent.postMessage('quit_game', '*');
+			console.log("[Godot Web] window.quitGame() invoked!");
+			try { window.parent.postMessage('quit_game', '*'); } catch (e) {}
+			try { window.top.postMessage('quit_game', '*'); } catch (e) {}
+		};
+		window.godotQuit = function () {
+			console.log("[Godot Web] window.godotQuit() invoked!");
+			try { window.parent.postMessage('quit_game', '*'); } catch (e) {}
+			try { window.top.postMessage('quit_game', '*'); } catch (e) {}
 		};
 
 		// Automatically restore keyboard/pointer focus to Godot canvas
