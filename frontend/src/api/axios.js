@@ -2,9 +2,11 @@ import axios from 'axios';
 import { store } from '../store/store';
 import { setCredentials, logOut } from '../store/authSlice';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? 'http://localhost:8080' : 'https://pddvniacbc.eu-west-1.awsapprunner.com');
+
 // 1. Create a base Axios instance. This saves us from typing the base URL every time.
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080', // Uses env var in production, localhost locally
+    baseURL: API_BASE_URL, // Uses env var or live App Runner URL in production, localhost in DEV
     withCredentials: true // CRITICAL: This tells Axios to automatically send the HttpOnly cookies!
 });
 
@@ -44,7 +46,7 @@ api.interceptors.response.use(
                 // Attempt to silently get a new access token using the HttpOnly cookie
                 // Note: The browser will automatically attach the HttpOnly cookie here because of `withCredentials: true`
                 const response = await axios.post(
-                    'http://localhost:8080/api/auth/refresh', // Your backend refresh endpoint
+                    `${API_BASE_URL}/api/auth/refresh`, // Your backend refresh endpoint
                     {}, 
                     { withCredentials: true } 
                 );

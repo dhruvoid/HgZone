@@ -1,6 +1,6 @@
 # Multi-stage Dockerfile for building and running the Spring Boot app (Java 21)
 # Build stage: use Maven with a JDK
-FROM maven:3.10.1-eclipse-temurin-21 AS build
+FROM maven:3-eclipse-temurin-21 AS build
 WORKDIR /workspace
 
 # Copy dependency descriptors first for better caching
