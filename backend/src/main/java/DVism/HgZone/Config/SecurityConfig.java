@@ -37,10 +37,14 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Allow the React frontend origin
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        // Allow local dev, Amplify domains, and custom origins
+        configuration.setAllowedOriginPatterns(Arrays.asList(
+            "http://localhost:*",
+            "https://*.amplifyapp.com",
+            "https://main.d1om78u4n1aud8.amplifyapp.com"
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true); // Needed for HttpOnly cookies
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
