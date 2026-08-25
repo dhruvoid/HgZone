@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const storedUser = JSON.parse(localStorage.getItem('user') || 'null');
+const storedToken = localStorage.getItem('accessToken');
+
 const initialState = {
-  accessToken: null,
-  isAuthenticated: false,
-  user: null, // Optional: store user info here
+  accessToken: storedToken,
+  isAuthenticated: !!storedToken,
+  user: storedUser,
 };
 
 export const authSlice = createSlice({
@@ -15,12 +18,16 @@ export const authSlice = createSlice({
       state.accessToken = action.payload.accessToken;
       state.user = action.payload.user;
       state.isAuthenticated = true;
+      localStorage.setItem('accessToken', action.payload.accessToken || '');
+      localStorage.setItem('user', JSON.stringify(action.payload.user || null));
     },
     // Call this when logout happens or if refresh token fails completely
     logOut: (state) => {
       state.accessToken = null;
       state.user = null;
       state.isAuthenticated = false;
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('user');
     },
   },
 });

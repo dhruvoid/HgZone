@@ -20,8 +20,8 @@ function App() {
           {/* Add more protected routes here! */}
         </Route>
 
-        {/* Catch-all: Redirect unknown routes to Register */}
-        <Route path="*" element={<Navigate to="/register" replace />} />
+        {/* Catch-all: Redirect unknown routes to Dashboard */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </Router>
   );

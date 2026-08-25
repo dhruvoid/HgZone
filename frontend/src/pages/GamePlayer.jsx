@@ -31,22 +31,18 @@ const GamePlayer = () => {
         };
 
         const handleMessage = (event) => {
-            console.log("GamePlayer received message:", event.data);
+            if (!event.data) return;
             const dataStr = typeof event.data === 'string' ? event.data.toLowerCase() : JSON.stringify(event.data || '').toLowerCase();
+            // Only redirect if message explicitly requests a game quit
             if (
-                dataStr.includes('quit') || 
-                dataStr.includes('exit') || 
-                dataStr.includes('close')
+                dataStr.includes('hgzone_quit') || 
+                dataStr.includes('godot_quit') || 
+                dataStr === 'quit'
             ) {
                 if (document.fullscreenElement) {
                     document.exitFullscreen().catch(() => {});
                 }
                 navigate('/dashboard');
-                setTimeout(() => {
-                    if (window.location.pathname !== '/dashboard') {
-                        window.location.href = '/dashboard';
-                    }
-                }, 100);
             }
         };
 
